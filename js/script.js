@@ -75,6 +75,29 @@ function setHTMLSection(pageNumber, thisStudentsArray) {		// to make the exceeds
 
 }
 
+function realTimeSearch() {	
+	var partialStudentsArray = [];										// empty out the array
+	var studentName = $("input").val();									// get the student name search value
+	for (var l = 0; l < fullStudentsArray.length; l++) {				// look at the entire array
+		if (fullStudentsArray[l]["Name"].indexOf(studentName) >= 0) {	// if a match is found
+			partialStudentsArray.push(fullStudentsArray[l]);			// add to this array
+		} else  {														// else check the email value for a match.
+			if (fullStudentsArray[l]["eMail"].indexOf(studentName) >= 0) {
+				partialStudentsArray.push(fullStudentsArray[l]);
+			}
+		}
+	}
+
+	if (partialStudentsArray.length < 1) {						// no rows returned
+		dStudentList[0].innerHTML = eStudentsNone;				// set error message and then focus on search field.
+		document.querySelector(".student-search > input").focus();
+		$(".error").css({ "color": "red"});
+		$(".pagination ul").remove(); 							//remove the old page buttons
+	} else {
+		setHTMLSection(1, partialStudentsArray);					// call setHTMLSection to build the page.
+		setPaginateButtons(partialStudentsArray);
+	}
+}
 //* --------------------- *//
 //* Main logic section    *//
 //* --------------------- *//
@@ -133,5 +156,7 @@ $(".student-search input").keyup( function (){
 	if ( $("input").val().length === 0) {		// when the search input field is blanked out
 		setHTMLSection(1, fullStudentsArray);	// reset to the full student array.
 		setPaginateButtons(fullStudentsArray);	// reset the page buttons.
+	} else {
+		realTimeSearch();
 	}
 });

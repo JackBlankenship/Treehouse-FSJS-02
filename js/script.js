@@ -50,7 +50,9 @@ function setPaginateButtons(thisStudentsArray) {
 
 	$(".pagination ul").remove(); 				//remove the old page buttons
 	pageinateHTML = '<ul><li><a class="active" href="#">1</a> '  + pageinateHTML + "</ul>";		// set page 1 as default active and insert the rest
-	$(".pagination").append(pageinateHTML);		// append to the end of pagination class
+	if (pageinates > 1) {
+		$(".pagination").append(pageinateHTML);		// append to the end of pagination class
+	}
 
 }
 

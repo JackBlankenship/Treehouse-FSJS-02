@@ -120,6 +120,7 @@ $('.student-search button').click( function(){
 		dStudentList[0].innerHTML = eStudentsNone;				// set error message and then focus on search field.
 		document.querySelector(".student-search > input").focus();
 		$(".error").css({ "color": "red"});
+		$(".pagination ul").remove(); 							//remove the old page buttons
 	} else {
 		setHTMLSection(1, partialStudentsArray);					// call setHTMLSection to build the page.
 		setPaginateButtons(partialStudentsArray);
